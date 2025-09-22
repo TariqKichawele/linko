@@ -1,3 +1,5 @@
+'use client'
+
 import { StreamChat } from "stream-chat";
 
 if (!process.env.NEXT_PUBLIC_STREAM_API_KEY) {

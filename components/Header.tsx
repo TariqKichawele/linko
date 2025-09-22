@@ -12,7 +12,7 @@ const Header = () => {
     const isDashboard = pathname.startsWith('/dashboard');
 
   return (
-    <header className='flex items-center justify-between px-4 h-15 sm:px-6'>
+    <header className='flex items-center justify-between px-4 h-16 sm:px-6'>
         <Link href={"/dashboard"} className='font-medium uppercase tracking-widest'>
             LINKO
         </Link>
@@ -20,11 +20,11 @@ const Header = () => {
         <div className='flex items-center gap-2'>
             <Authenticated>
                 {!isDashboard && (
-                    <Button variant='outline'>
-                        <Link href={"/dashboard"}>
+                    <Link href={"/dashboard"}>
+                        <Button variant='outline'>
                             Dashboard
-                        </Link>
-                    </Button>
+                        </Button>
+                    </Link>
                 )}
                 <UserButton />
             </Authenticated>

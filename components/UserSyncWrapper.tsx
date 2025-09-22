@@ -107,7 +107,7 @@ const UserSyncWrapper = ({ children }: { children: React.ReactNode }) => {
         )
     }
   return (
-    <div>UserSyncWrapper</div>
+    <div>{children}</div>
   )
 }
 

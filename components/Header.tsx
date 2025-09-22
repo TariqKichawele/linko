@@ -13,7 +13,7 @@ const Header = () => {
 
   return (
     <header className='flex items-center justify-between px-4 h-16 sm:px-6'>
-        <Link href={"/dashboard"} className='font-medium uppercase tracking-widest'>
+        <Link href={"/"} className='font-medium uppercase tracking-widest'>
             LINKO
         </Link>
 

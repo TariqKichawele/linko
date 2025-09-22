@@ -11,7 +11,7 @@ export default function Home() {
       <Header />
       
       <main className="flex-1 flex flex-col items-center px-4 py-16 sm:px-6 text-center gap-20">
-        <div className="max-w-4xl spacy-y-8 relative">
+        <div className="max-w-4xl space-y-8 relative">
 
           <div className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50
           dark:from-blue-950/20 dark:via-indigo-950/20 dark:to-purple-950/20 rounded-3xl blur-3xl scale-150 opacity-60"/>

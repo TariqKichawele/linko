@@ -22,7 +22,7 @@ const UserSearch = ({
     const { searchTerm, setSearchTerm, searchResults, isLoading } = useUserSearch();
     const { user } = useUser();
 
-    const filteredResults = searchResults.filter(result => result._id !== user?.id);
+    const filteredResults = searchResults.filter(result => result.clerkId !== user?.id);
 
     const handleSelectUser = (user: (typeof searchResults[0])) => {
         onSelectUser?.(user);

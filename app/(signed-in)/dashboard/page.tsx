@@ -6,13 +6,13 @@ import {
     MessageInput, 
     MessageList, 
     Thread, 
-    useChatContext 
+    useChatContext,
+    Window
 } from 'stream-chat-react'
 import React from 'react'
 import { useUser } from '@clerk/nextjs'
 import { useRouter } from 'next/navigation'
 import { useSidebar } from '@/components/ui/sidebar'
-import { Window } from 'stream-chat-react'
 import { Button } from '@/components/ui/button'
 import { LogOutIcon, VideoIcon } from 'lucide-react'
 
@@ -23,11 +23,27 @@ const Dashboard = () => {
     const { setOpen } = useSidebar();
 
     const handleCall = () => {
-        console.log("Calling...");
+        if (!channel || !user?.id) return;
+        router.push(`/dashboard/video-call/${channel.id}`);
+        setOpen(false);
     }
 
-    const handleLeaveChat = () => {
-        console.log("Leaving chat...");
+    const handleLeaveChat = async () => {
+        if (!channel || !user?.id) return;
+
+        const confirm = window.confirm("Are you sure you want to leave this chat?");
+        if (!confirm) return;
+
+        try {
+            await channel.removeMembers([user.id]);
+
+            setActiveChannel(undefined);
+
+            router.push("/dashboard");
+        } catch (error) {
+            console.error("Error leaving chat:", error);
+            window.alert("Failed to leave chat. Please try again.");
+        }
     }
 
 
@@ -58,12 +74,12 @@ const Dashboard = () => {
                                 Leave chat
                             </Button>
                         </div>
+                    </div>
 
-                        <MessageList />
+                    <MessageList />
 
-                        <div className='sticky bottom-0 w-full'>
-                            <MessageInput />
-                        </div>
+                    <div className='sticky bottom-0 w-full'>
+                        <MessageInput />
                     </div>
                 </Window>
                 <Thread />

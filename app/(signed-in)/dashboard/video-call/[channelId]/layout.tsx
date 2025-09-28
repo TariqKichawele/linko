@@ -1,6 +1,11 @@
 'use client'
 
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { 
+    useCallback, 
+    useEffect, 
+    useMemo, 
+    useState 
+} from 'react'
 import { 
     Call, 
     StreamCall, 
@@ -23,7 +28,7 @@ if (!process.env.NEXT_PUBLIC_STREAM_API_KEY) {
 
 const VideoCallLayout = ({ children }: { children: React.ReactNode }) => {
     const { user } = useUser();
-    const { id } = useParams();
+    const { channelId } = useParams();
 
     const [call, setCall] = useState<Call | null>(null);
     const [error, setError] = useState<string | null>(null);
@@ -67,11 +72,11 @@ const VideoCallLayout = ({ children }: { children: React.ReactNode }) => {
     }, [streamUser, tokenProvider]);
 
     useEffect(() => {
-        if (!id || !client) return;
+        if (!channelId || !client) return;
 
         setError(null);
 
-        const streamCall = client.call("default", id as string);
+        const streamCall = client.call("default", channelId as string);
 
         const joinCall = async () => {
             try {
@@ -91,7 +96,7 @@ const VideoCallLayout = ({ children }: { children: React.ReactNode }) => {
                 streamCall.leave();
             }
         }
-    }, [id, client])
+    }, [channelId, client])
 
     if (!client) {
         return (
@@ -117,7 +122,7 @@ const VideoCallLayout = ({ children }: { children: React.ReactNode }) => {
                     </div>
                 </div>
                 <div className='text-green-600 font-mono text-sm bg-green-100 px-3 py-1 rounded-full inline-block'>
-                    Call ID: {id}
+                    Call ID: {channelId}
                 </div>
             </StatusCard>
         )
